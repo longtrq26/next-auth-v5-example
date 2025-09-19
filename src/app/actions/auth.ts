@@ -1,6 +1,5 @@
 "use server";
 
-import { signOut } from "@/auth";
 import { REFRESH_API, SIGNIN_API } from "@/constants";
 import { parseExp } from "@/lib/utils";
 import { LoginResponse } from "@/types/api";
@@ -76,17 +75,6 @@ export async function doRefreshToken({
     };
   } catch (error) {
     console.error("Refresh token error:", error);
-    return { success: false, error: "An unexpected error occurred" };
-  }
-}
-
-export async function doSignOut() {
-  try {
-    await signOut({ redirect: false });
-
-    return { success: true, redirectTo: "/login" };
-  } catch (error) {
-    console.error("Sign out error:", error);
     return { success: false, error: "An unexpected error occurred" };
   }
 }
